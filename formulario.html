@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <title>NEIestetica</title>
+    <style>
+        body{
+            background-color: rgb(124, 121, 121);
+            font-family: 'Courier New', Courier, monospace;
+        }
+        form{
+            margin-top: 60px;
+            margin-left:30%;
+            width: 40%;
+            background-color: rgb(141, 140, 140);
+            text-align: center;
+            border-radius: 15px;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+function cargar(){
+    //valida nombre
+    var nombre=document.formulario.nombre.value.trim();
+    var tam_nbre=nombre.length;
+    if((!nombre) || (tam_nbre<3)){
+        alert('su nombre debe ser mayor a 3 letras!');
+        document.formulario.nombre.focus();
+        return false;
+    }
+    //valida edad
+    var edad=document.formulario.edad.value;
+    var ed=parseInt(edad);
+    if((!ed)||(ed<18)){
+        alert('el solicitante debe ser mayor a 18 años, o iscribirse un tutor mayor de edad y aclarar para quien es destinado el tratamiento en el area de comentarios. Gracias');
+        document.formulario.edad.focus();
+        return false;
+    }
+    //valida telefono
+    var telefono=document.formulario.telefono.value;
+    if(!parseInt(telefono)||(telefono.length<10)){
+        alert('el telefono a ingresar debe anteponer el codigo de area sin 0 seguido del numero sin 15  - "ejemplo:2664295549" -  Gracias');
+        document.formulario.telefono.focus();
+        return false;
+    }
+
+    // valida checkbox
+    var cantchk = 0;
+        var cant = document.formulario.tratamiento.length;
+        for(i=0;i<cant;i++)
+            {
+            if(document.formulario.tratamiento[i].checked)
+                {
+                    cantchk++;    
+                }
+            }
+            if(cantchk<1)
+            {
+                alert('por favor seleccione minimo un tratamiento a reaziarse');
+                return false;
+            }
+    if(confirm('los datos ingresados son validos?'))
+    return true;
+    else return false;
+}
+</script>      
+</head>
+
+<body>
+<form name="formulario" method="GET" action="#">
+
+    <br>Nombre: <input type="text" name="nombre">
+    <br><br>
+    Edad: <input type="text" name="edad">
+    <br><br>
+    Telefono: <input type="text" name="telefono" maxlength="10">
+    <br><br>
+    seleccione sexo:
+    <label for="muj">mujer </label>
+    <input type="radio" name="sexo" value="M" id="muj"checked>
+    <label for="hom">hombre</label>
+    <input type="radio" name="sexo" value="H" id="hom">
+    <br><br>
+    <hr>
+    <br>
+    selecciona nuestros tratamientos:
+    <br><br>
+    <input type = "checkbox" name = "tratamiento" value = "manicuria">manicuria
+    <input type = "checkbox" name = "tratamiento" value = "pedicuria">pedicuria
+    <input type = "checkbox" name = "tratamiento" value = "faciales">faciales
+    <br>
+    <input type = "checkbox" name = "tratamiento" value = "depilacion">depilacion
+    <input type = "checkbox" name = "tratamiento" value = "corporal">corporales
+    <input type = "checkbox" name = "tratamiento" value = "capilares">capilares
+    <br><br>
+    <hr>
+    comentarios:
+    <br>
+    <textarea name="comentario" rows="5" cols="25" wrap="hard"></textarea>
+    <br><br>
+    <hr>
+    <input type="submit" value="solicitar turno" onclick="return cargar();">
+
+</form>
+</body>
+</html>
